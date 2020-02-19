@@ -26,10 +26,10 @@ export class GitLabClient extends HostingClientBase<GitLabConfig, Gitlab> {
   private id: number;
   private gitlabGraphqlClient: GitlabGraphqlClient;
 
-  constructor(name: string, hostId: number, app: Application, id: number, client: Gitlab,
-              gitlabGraphqlClient: GitlabGraphqlClient,
+  constructor(repoId: number, ownerId: number, name: string, hostId: number,
+              app: Application, id: number, client: Gitlab, gitlabGraphqlClient: GitlabGraphqlClient,
               hostBase: HostingBase<GitLabConfig, HostingClientBase<GitLabConfig, Gitlab>, Gitlab>) {
-    super(name, hostId, app, hostBase);
+    super(repoId, ownerId, name, hostId, app, hostBase);
     this.id = id;
     this.rawClient = client;
     this.gitlabGraphqlClient = gitlabGraphqlClient;

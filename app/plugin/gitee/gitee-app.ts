@@ -33,7 +33,7 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
     this.client = new GiteeRawClient(this.config.primaryToken, this.app.phManager.getPromiseHandler());
   }
 
-  public async getInstalledRepos(): Promise<Array<{fullName: string, payload: any}>> {
+  public async getInstalledRepos(): Promise<Array<{repoId: number, ownerId: number, fullName: string, payload: any}>> {
     // list all repos that bot account is the admin
     const res = await this.client.repos.listUserRepos();
     return res.map(r => {
@@ -44,9 +44,9 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
     });
   }
 
-  public async addRepo(name: string, _payload: any): Promise<void> {
-    const client = new GiteeClient(name, this.id, this.app, this.client, this);
-    this.clientMap.set(name, async () => client);
+  public async addRepo(repoId: number, ownerId: number, name: string, _payload: any): Promise<void> {
+    const client = new GiteeClient(repoId, ownerId, name, this.id, this.app, this.client, this);
+    this.clientMap.set(repoId, async () => client);
     this.initWebhooksForRepo(name, this.webhooksPath);
   }
 
@@ -112,6 +112,7 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
         };
         const ie = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: payload.repository.full_name,
           action: parseAction(payload.action),
           issue: {
@@ -135,6 +136,7 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
       case 'Tag Hook':
         const pe = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: payload.repository.full_name,
           push: {
             ref: payload.ref,
@@ -182,6 +184,7 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
         };
         const mre = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: payload.repository.full_name,
           action: parsePullRequest(payload.action), // least used.
           pullRequest: {
@@ -223,6 +226,7 @@ export class GiteeApp extends HostingBase<GiteeConfig, GiteeClient, GiteeRawClie
         };
         const ce: CommentUpdateEvent = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: payload.repository.full_name,
           // issue's number is like I192YQ
           // pr's number is a ordinal number

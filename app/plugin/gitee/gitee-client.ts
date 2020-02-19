@@ -24,8 +24,9 @@ export class GiteeClient extends HostingClientBase<GiteeConfig, GiteeRawClient> 
 
   private repoName: { owner: string, repo: string };
 
-  constructor(name: string, hostId: number, app: Application, client: GiteeRawClient, hostBase: HostingBase<GiteeConfig, HostingClientBase<GiteeConfig, GiteeRawClient>, GiteeRawClient>) {
-    super(name, hostId, app, hostBase);
+  constructor(repoId: number, ownerId: number, name: string, hostId: number, app: Application, client: GiteeRawClient,
+              hostBase: HostingBase<GiteeConfig, HostingClientBase<GiteeConfig, GiteeRawClient>, GiteeRawClient>) {
+    super(repoId, ownerId, name, hostId, app, hostBase);
     this.repoName = parseRepoName(this.fullName);
     this.rawClient = client;
   }

@@ -1,6 +1,6 @@
 {
-  "name": "mentor-bot-gitee-manager",
-  "description": "Gitee manager for mentor bot",
+  "name": "hypertrons-gitee-manager",
+  "description": "Gitee manager for hypertrons",
   "eggPlugin": {
     "name": "gitee"
   }

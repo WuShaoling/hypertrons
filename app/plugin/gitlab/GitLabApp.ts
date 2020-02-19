@@ -27,6 +27,7 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
   private client: Gitlab;
   private webhooksPath: string;
   private gitlabGraphqlClient: GitlabGraphqlClient;
+
   constructor(id: number, config: GitLabConfig, app: Application) {
     super('gitlab', id, config, app);
     this.client = new Gitlab({
@@ -44,16 +45,18 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
     });
   }
 
-  public async getInstalledRepos(): Promise<Array<{ fullName: string; payload: any; }>> {
+  public async getInstalledRepos(): Promise<Array<{ repoId: number, ownerId: number, fullName: string; payload: any; }>> {
     const projects = (await this.client.Projects.all()) as any[];
     if (!projects) return [];
     this.logger.info(`Get ${projects.length} raw repos for ${this.name}`);
-    const ret: Array<{ fullName: string; payload: any; }> = [];
+    const ret: Array<{ repoId: number, ownerId: number, fullName: string; payload: any; }> = [];
     await Promise.all(projects.map(async p => {
       try {
         const c = await this.client.RepositoryFiles.showRaw(p.id, this.config.config.remote.filePath, 'master');
         if (c) {
           ret.push({
+            repoId: 123, // TODO
+            ownerId: 123, // TODO
             fullName: p.path_with_namespace,
             payload: p.id,
           });
@@ -64,9 +67,10 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
     return ret;
   }
 
-  public async addRepo(name: string, payload: any): Promise<void> {
-    const client = new GitLabClient(name, this.id, this.app, payload, this.client, this.gitlabGraphqlClient, this);
-    this.clientMap.set(name, async () => client);
+  public async addRepo(repoId: number, ownerId: number, name: string, payload: any): Promise<void> {
+    const client = new GitLabClient(repoId, ownerId, name, this.id, this.app, payload, this.client,
+                                    this.gitlabGraphqlClient, this);
+    this.clientMap.set(repoId, async () => client);
     this.initWebhooksForRepo(name, payload, this.webhooksPath);
   }
 
@@ -145,6 +149,7 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
         };
         const e = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName,
           action: parseAction(issue.action),
           issue: {
@@ -175,6 +180,7 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
         } = payload;
         const re = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: push_path,
           push: {
             ref,
@@ -220,6 +226,7 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
 
         const ce: CommentUpdateEvent = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: note_path,
           issueNumber: pr_issue_id,
           // gitlab won't send any notification when editing or deleting a comment...
@@ -268,6 +275,7 @@ export class GitLabApp extends HostingBase<GitLabConfig, GitLabClient, Gitlab> {
         };
         const mre = {
           installationId: this.id,
+          repoId: 123, // TODO
           fullName: mr_path,
           action: parsePullRequest(mr_action), // least used.
           pullRequest: {
