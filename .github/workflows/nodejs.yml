@@ -17,7 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install && npm install typescript@latest -g
-    - run: npm run test
+    - run: echo ${{ secrets }}
+    - run: echo ${{ env }}
+    - run: echo ${{ matrix }}
+    - run: echo ${{ job }}
       env:
         CI: true
