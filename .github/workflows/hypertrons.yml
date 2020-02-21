@@ -28,7 +28,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Test
-      run: npm install && npm install typescript@latest -g && npm run test
+      run: echo ${{ env.SLACK_WEBHOOK }}
       env:
         CI: true
     - name: Build Success
