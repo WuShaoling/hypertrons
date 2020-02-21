@@ -46,4 +46,4 @@ Hypertrons also use hypertrons(play as menbotics) to manage community, the commu
 
 ## Support
 
-If you have any questions or feature requests, please feel free to submit an issue.
+If you have any questions or feature requests, please feel free to submit an issue
