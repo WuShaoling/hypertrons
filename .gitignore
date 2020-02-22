@@ -22,3 +22,5 @@ typings/**/*
 .travis.yml
 private-key.pem
 globalConfig.json
+
+dd
