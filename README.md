@@ -34,7 +34,7 @@ The underlying developing framework is [eggjs](https://eggjs.org/) which does a 
 
 The upper layer is written in TypeScript and implement the event manager, schedule manager, hosting platform manager, etc.
 
-On the client layer, [fengari](https://github.com/fengari-lua/fengari/) is used to provide a Lua VM approach using Node.js. [Limited Lua binding](./app/lua-vm/LuaVm.ts) is written to provide Lua code execution alibity in TypeScript.
+On the client layer, [fengari](https://github.com/fengari-lua/fengari/) is used to provide a Lua VM approach using Node.js. [Limited Lua binding](./app/lua-vm/LuaVm.ts) is written to provide Lua code execution alibity in TypeScript..
 
 The components are all written in Lua to provide hot fix/reload and logic customization.
 
