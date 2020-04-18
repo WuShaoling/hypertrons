@@ -16,7 +16,7 @@ For config details, please refer to [robot config](./docs/configs/README.md).
 
 ### Run the robot
 
-Need to pass the config file into environment viriable `GLOBAL_CONFIG` and run `npm start` to start the robot.
+Need to pass the config file into environment viriable `GLOBAL_CONFIG` and run `npm start` to start the robot..
 
 You can also run the robot by [Docker](https://www.docker.com/), `Dockerfile` is provided to start the project, use `docker build` to build the image and use `docker run` to run the image. Notice that the port exposed by default is 7001.
 
