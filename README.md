@@ -40,7 +40,7 @@ The components are all written in Lua to provide hot fix/reload and logic custom
 
 For more details, please refer to [architecture](./docs/ARCHITECTURE.md).
 
-## Community
+## Community...
 
 Hypertrons also use hypertrons(play as menbotics) to manage community, the community roles can be found in [config file](./.github/hypertrons.json).
 
