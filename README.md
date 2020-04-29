@@ -8,7 +8,7 @@ Hypertrons is an open source robot hosting platform which supports [GitHub](http
 
 Hypertrons framework is written in [TypeScript](https://github.com/Microsoft/TypeScript) to improve development quality and the components are written in [Lua](https://www.lua.org) to improve security and support component hot fix/reload.
 
-### Platform configuration
+### Platform configuration...
 
 Run `npm install` after cloning the repository and add a `globalConfig.json` file to configure the robot account, the content of the file should be like below, and you can find a sample config in [`globalConfigTemplate.json`](./globalConfigTemplate.json).
 
