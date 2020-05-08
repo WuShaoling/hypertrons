@@ -1,5 +1,8 @@
 {
   "weekly_report": {
     "version": 1
+  },
+  "vote": {
+    "version": 1
   }
 }
