@@ -2,8 +2,5 @@
   "weekly_report": {
     "version": 1,
     "generateTime": "0 0 12 * * 1"
-  },
-  "approve": {
-    "version": 1
   }
 }
