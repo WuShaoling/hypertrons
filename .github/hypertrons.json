@@ -1,7 +1,6 @@
 {
   "weekly_report": {
-    "version": 1,
-    "generateTime": "0 0 12 * * 1"
+    "version": 1
   },
   "self_assign": {
     "version": 1
