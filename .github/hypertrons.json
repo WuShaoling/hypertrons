@@ -1,3 +1,6 @@
 {
-
+  "auto_merge": {
+    "version": 1,
+    "sched": "0 */5 * * * *"
+  }
 }
